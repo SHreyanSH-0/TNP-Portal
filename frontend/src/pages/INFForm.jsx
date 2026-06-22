@@ -80,12 +80,21 @@ export default function INFForm() {
     }
   };
 
+  const stepperLabels = [
+    "Company Details",
+    "Internship Profile",
+    "Courses Considered",
+    "Eligibility Criteria",
+    "Selection Process",
+    "Contact Details"
+  ];
+
   return (
     <FormLayout>
       <FormStepper
         title="Internship Notification Form"
         currentStep={currentStep}
-        totalSteps={totalSteps}
+        steps={stepperLabels}
       />
 
       <form

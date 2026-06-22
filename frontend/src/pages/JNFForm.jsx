@@ -80,12 +80,21 @@ export default function JNFForm() {
     }
   };
 
+  const stepperLabels = [
+    "Company Details",
+    "Job Profile",
+    "Courses Considered",
+    "Eligibility Criteria",
+    "Selection Process",
+    "Contact Details"
+  ];
+
   return (
     <FormLayout>
       <FormStepper
         title="Job Notification Form"
         currentStep={currentStep}
-        totalSteps={totalSteps}
+        steps={stepperLabels}
       />
 
       <form
