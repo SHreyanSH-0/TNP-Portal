@@ -57,21 +57,31 @@ export default function JNFJobProfileSection({
               }
             />
 
-            <SelectField
-              label="Job Description Attached"
-              value={
-                formData.jobProfiles[course.key]
-                  .jobDescriptionAttached
-              }
-              onChange={(e) =>
-                handleProfileChange(
-                  course.key,
-                  "jobDescriptionAttached",
-                  e.target.value
-                )
-              }
-              options={["Yes", "No"]}
-            />
+            <div>
+              <SelectField
+                label="Job Description Available"
+                value={
+                  formData.jobProfiles[course.key]
+                    .jobDescriptionAttached
+                }
+                onChange={(e) =>
+                  handleProfileChange(
+                    course.key,
+                    "jobDescriptionAttached",
+                    e.target.value
+                  )
+                }
+                options={["Yes", "No"]}
+              />
+
+              <p className="mt-2 text-xs text-gray-500 leading-relaxed">
+                If you have a detailed Job Description
+                (JD) document in PDF format, kindly
+                share it by replying to the same email
+                thread through which the Job
+                Notification Form (JNF) was received.
+              </p>
+            </div>
 
             <InputField
               label="CTC"
