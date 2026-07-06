@@ -80,19 +80,18 @@ export default function INFForm() {
   // STEP 2
   if (currentStep === 2) {
     const hasInternshipProfile = Object.values(
-      formData.internshipProfiles
-    ).some((profile) => {
-      return (
-        profile.designation?.trim() &&
-        profile.jobDescriptionAttached?.trim() &&
-        profile.gross?.trim() &&
-        profile.location?.trim()
-      );
-    });
+  formData.internshipProfiles
+).some((profile) => {
+  return (
+    profile.designation?.trim() &&
+    profile.gross?.trim() &&
+    profile.location?.trim()
+  );
+});
 
     if (!hasInternshipProfile) {
       setValidationMessage(
-        "Please complete the Internship Profile (Designation, Job Description Available, Gross Stipend and Location) for at least one programme before proceeding."
+        "Please complete the Internship Profile (Designation, Gross Stipend and Location) for at least one programme before proceeding."
       );
       scrollToTop();
       return;
