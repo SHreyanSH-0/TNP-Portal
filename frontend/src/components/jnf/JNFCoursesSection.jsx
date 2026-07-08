@@ -84,11 +84,10 @@ export default function JNFCoursesSection({
               <CheckboxGroup
                 label=""
                 options={[
-                  "Computer Engineering / Cyber Security",
+                  "M.Tech Computer Engineering (Specialization in Computer)",
+                  "M.Tech Computer Engineering (Specialization in Cyber Security)",
                 ]}
-                selected={
-                  formData.pgSpecializations
-                }
+                selected={formData.pgSpecializations}
                 onChange={(option) =>
                   toggleSelection(
                     "pgSpecializations",
