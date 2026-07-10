@@ -18,6 +18,7 @@ import INFBetterUnderstandingSection from "../components/inf/INFBetterUnderstand
 import INFImportantNotes from "../components/inf/INFImportantNotes";
 import INFSubmitSection from "../components/inf/INFSubmitSection";
 import FormValidationMessage from "../components/FormValidationMessage";
+import UndertakingSection from "../components/UndertakingSection";
 export default function INFForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -128,10 +129,35 @@ export default function INFForm() {
   
   const handleSubmit = async (e) => {
     e.preventDefault(); 
+    
+    if (!formData.undertakingAccepted) {
+      setValidationMessage("Please accept the undertaking.");
+      scrollToTop();
+      return;
+    }
+    
+    if (!formData.formFillerName || formData.formFillerName.trim() === "") {
+      setValidationMessage("Please enter the name of the form filler.");
+      scrollToTop();
+      return;
+    }
+    
+    if (!formData.formFillerDesignation || formData.formFillerDesignation.trim() === "") {
+      setValidationMessage("Please enter the designation.");
+      scrollToTop();
+      return;
+    }
+
+    const trimmedData = {
+      ...formData,
+      formFillerName: formData.formFillerName.trim(),
+      formFillerDesignation: formData.formFillerDesignation.trim()
+    };
+
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/inf`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/inf`, trimmedData);
       localStorage.removeItem("infDraft");
       navigate(`/success/${response.data.id}`);
     } catch (error) {
@@ -272,6 +298,11 @@ export default function INFForm() {
             />
 
             <INFImportantNotes />
+
+            <UndertakingSection 
+              formData={formData}
+              handleChange={handleChange}
+            />
 
             <INFSubmitSection
               onPrevious={previousStep}

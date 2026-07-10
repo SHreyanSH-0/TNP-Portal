@@ -18,6 +18,7 @@ import JNFBetterUnderstandingSection from "../components/jnf/JNFBetterUnderstand
 import JNFImportantNotes from "../components/jnf/JNFImportantNotes";
 import JNFSubmitSection from "../components/jnf/JNFSubmitSection";
 import FormValidationMessage from "../components/FormValidationMessage";
+import UndertakingSection from "../components/UndertakingSection";
 
 // Same "Important Mentions" scroll box used on the Home page,
 // shown here before the JNF form so recruiters see the policies first.
@@ -290,10 +291,35 @@ export default function JNFForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.undertakingAccepted) {
+      setValidationMessage("Please accept the undertaking.");
+      scrollToTop();
+      return;
+    }
+    
+    if (!formData.formFillerName || formData.formFillerName.trim() === "") {
+      setValidationMessage("Please enter the name of the form filler.");
+      scrollToTop();
+      return;
+    }
+    
+    if (!formData.formFillerDesignation || formData.formFillerDesignation.trim() === "") {
+      setValidationMessage("Please enter the designation.");
+      scrollToTop();
+      return;
+    }
+
+    const trimmedData = {
+      ...formData,
+      formFillerName: formData.formFillerName.trim(),
+      formFillerDesignation: formData.formFillerDesignation.trim()
+    };
+
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/jnf`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/jnf`, trimmedData);
       localStorage.removeItem("jnfDraft");
       navigate(`/success/${response.data.id}`);
     } catch (error) {
@@ -437,6 +463,11 @@ export default function JNFForm() {
             />
 
             <JNFImportantNotes />
+
+            <UndertakingSection 
+              formData={formData}
+              handleChange={handleChange}
+            />
 
             <JNFSubmitSection
               onPrevious={previousStep}

@@ -1,5 +1,9 @@
 const jnfInitialState = {
   
+  undertakingAccepted: false,
+  formFillerName: "",
+  formFillerDesignation: "",
+
   companyName: "",
   emailAddress: "",
   website: "",

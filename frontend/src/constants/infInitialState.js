@@ -1,5 +1,9 @@
 const infInitialState = {
   
+  undertakingAccepted: false,
+  formFillerName: "",
+  formFillerDesignation: "",
+
   companyName: "",
   emailAddress: "",
   website: "",
