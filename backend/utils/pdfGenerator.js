@@ -388,6 +388,40 @@ const generatePDF = (submission, res) => {
     }
   });
 
+  // Undertaking Section
+  const declarationText = "I hereby declare that all the information provided in this form is true, complete, and correct to the best of my knowledge. I have read, understood, and agree to abide by all the Training & Placement Cell policies and guidelines."
+  
+  checkPageBreak(150);
+  drawSectionHeader('Undertaking');
+  
+  const undertakingStartY = doc.y;
+  
+  // Declaration text
+  doc.fillColor(colors.textDark).fontSize(10).font(fonts.regular).text(declarationText, margins.left + 10, doc.y, { width: contentWidth - 20, align: 'justify' });
+  
+  doc.moveDown(1.5);
+  
+  // Statuses
+  doc.fillColor(colors.textMedium).fontSize(10).font(fonts.bold).text("Undertaking Accepted:", margins.left + 10, doc.y, { continued: true });
+  doc.fillColor(colors.textDark).font(fonts.regular).text(` ${data.undertakingAccepted ? 'Yes' : 'No'}`);
+  doc.moveDown(0.8);
+
+  doc.fillColor(colors.textMedium).fontSize(10).font(fonts.bold).text("Name of Form Filler:", margins.left + 10, doc.y, { continued: true });
+  doc.fillColor(colors.textDark).font(fonts.regular).text(` ${data.formFillerName || 'N/A'}`);
+  doc.moveDown(0.8);
+
+  doc.fillColor(colors.textMedium).fontSize(10).font(fonts.bold).text("Designation:", margins.left + 10, doc.y, { continued: true });
+  doc.fillColor(colors.textDark).font(fonts.regular).text(` ${data.formFillerDesignation || 'N/A'}`);
+  doc.moveDown(0.8);
+  
+  doc.fillColor(colors.textMedium).fontSize(10).font(fonts.bold).text("Submitted On:", margins.left + 10, doc.y, { continued: true });
+  doc.fillColor(colors.textDark).font(fonts.regular).text(` ${new Date(submission.submittedAt).toLocaleString()}`);
+  
+  doc.y += 10;
+  
+  doc.roundedRect(margins.left, undertakingStartY - 4, contentWidth, doc.y - undertakingStartY + 4, 4).lineWidth(1).strokeColor(colors.border).stroke();
+  doc.moveDown(2);
+
   
   const range = doc.bufferedPageRange();
   for (let i = range.start; i < range.start + range.count; i++) {
