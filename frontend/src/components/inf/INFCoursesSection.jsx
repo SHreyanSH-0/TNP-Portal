@@ -2,7 +2,13 @@ import SectionCard from "../SectionCard";
 import CheckboxGroup from "../CheckboxGroup";
 
 import { INF_UG_BRANCHES } from "../../constants/formConstants";
-
+const DUAL_DEGREE_BRANCHES = [
+  "Computer Engineering",
+  "Civil Engineering",
+  "Electrical Engineering",
+  "Electronics & Communication Engineering",
+  "Mechanical Engineering",
+];
 export default function INFCoursesSection({
   formData,
   setFormData,
@@ -40,7 +46,27 @@ export default function INFCoursesSection({
             )
           }
         />
+        <div className="mt-8">
+          <h4 className="font-semibold text-[#7A0019] mb-2">
+            Dual Degree
+          </h4>
 
+          <p className="text-sm text-gray-600 mb-4 italic">
+            Dual Degree students are eligible to join full-time only after completing the remaining two years of their 5-year programme i.e. in 2029.
+          </p>
+
+          <CheckboxGroup
+            label=""
+            options={DUAL_DEGREE_BRANCHES}
+            selected={formData.dualDegreeBranches}
+            onChange={(option) =>
+              toggleSelection(
+                "dualDegreeBranches",
+                option
+              )
+            }
+          />
+        </div>
         <div>
           <h3 className="text-lg font-semibold mb-6">
             Post Graduate Programme

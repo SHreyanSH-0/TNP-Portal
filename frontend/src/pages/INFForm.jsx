@@ -109,7 +109,8 @@ export default function INFForm() {
   if (currentStep === 3) {
     const hasCourses =
       formData.ugBranches.length > 0 ||
-      formData.pgSpecializations.length > 0;
+  formData.dualDegreeBranches.length > 0 ||
+  formData.pgSpecializations.length > 0;
 
     if (!hasCourses) {
       setValidationMessage(

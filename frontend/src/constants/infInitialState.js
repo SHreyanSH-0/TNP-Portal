@@ -54,6 +54,7 @@ const infInitialState = {
 
   
   ugBranches: [],
+  dualDegreeBranches: [],
   pgSpecializations: [],
 
   
