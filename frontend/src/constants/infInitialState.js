@@ -1,27 +1,25 @@
 const infInitialState = {
-  
+
   undertakingAccepted: false,
   formFillerName: "",
   formFillerDesignation: "",
 
   companyName: "",
-  emailAddress: "",
   website: "",
-  companyType: "",
-  companyTypeOther: "",
-  domain: "",
-  domainOther: "",
-  organisationDescription: "",
-  internshipType: "",
+  category: [],
+  categoryOther: "",
+  hiringType: "",
+  companyOverview: "",
+  // internshipType: "",   // Step 2 ke liye (Internship Type: Only/FTE/PPO) — separate rakha
 
-  
+
   minimumCGPA: "",
   medicalCondition: "",
   otherCriteria: "",
   backlogsAllowed: "",
   historyOfBacklogsAllowed: "",
 
-  
+
   resumeShortlisting: "",
   preferredVisitDate: "",
   prePlacementTalk: "",
@@ -33,78 +31,64 @@ const infInitialState = {
   technicalInterview: "",
   hrInterview: "",
 
-  
+
   sponsorEvents: "",
   studentCompetitions: "",
   competitionDetails: "",
 
-  
+
   contacts: [
     {
       name: "",
       designation: "",
       mobile: "",
       email: "",
+      signature: "",
     },
     {
       name: "",
       designation: "",
       mobile: "",
       email: "",
+      signature: "",
     },
   ],
 
-  
+
   ugBranches: [],
   dualDegreeBranches: [],
   pgSpecializations: [],
 
-  
+
   internshipProfiles: {
-    btech: {
-      designation: "",
-      stipend: "",
-      gross: "",
-      perks: "",
-      trainingPeriod: "",
-      location: "",
-    },
-
-    mca: {
-      designation: "",
-      stipend: "",
-      gross: "",
-      perks: "",
-      trainingPeriod: "",
-      location: "",
-    },
-
-    mtech: {
-      designation: "",
-      stipend: "",
-      gross: "",
-      perks: "",
-      trainingPeriod: "",
-      location: "",
-    },
-
-    mba: {
-      designation: "",
-      stipend: "",
-      gross: "",
-      perks: "",
-      trainingPeriod: "",
-      location: "",
-    },
-
-    msc: {
-      designation: "",
-      stipend: "",
-      gross: "",
-      perks: "",
-      trainingPeriod: "",
-      location: "",
-    },
+  btech: {
+    designation: "",
+    ctc: "",
+    stipend: "",
+    internshipDuration: "",
+    location: "",
+  },
+  mba: {
+    designation: "",
+    ctc: "",
+    stipend: "",
+    internshipDuration: "",
+    location: "",
+  },
+  mca: {
+    designation: "",
+    ctc: "",
+    stipend: "",
+    internshipDuration: "",
+    location: "",
+  },
+  dualDegree: {
+    designation: "",
+    ctc: "",
+    stipend: "",
+    internshipDuration: "",
+    location: "",
+  },
   },
 };
 

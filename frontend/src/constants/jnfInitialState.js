@@ -1,24 +1,29 @@
 const jnfInitialState = {
-  
+
   undertakingAccepted: false,
   formFillerName: "",
   formFillerDesignation: "",
 
-  companyName: "",
+  // Purane (remove karo agar sirf yahi use ho rahe the):
   emailAddress: "",
-  website: "",
   companyType: "",
   companyTypeOther: "",
   domain: "",
   domainOther: "",
   organisationDescription: "",
 
-  
+  // Naye (add karo):
+  category: [],
+  categoryOther: "",
+  hiringType: "",
+  companyOverview: "",
+
+
   minimumCGPA: "",
   medicalCondition: "",
   otherCriteria: "",
 
-  
+
   resumeShortlisting: "",
   prePlacementTalk: "",
   groupDiscussion: "",
@@ -33,7 +38,7 @@ const jnfInitialState = {
   accommodationRequired: "",
   bondDetails: "",
 
-  
+
   sponsorEvents: "",
   internshipsOffered: "",
   internshipStreams: "",
@@ -41,27 +46,29 @@ const jnfInitialState = {
   studentContests: "",
   contestDetails: "",
 
-  
+
   contacts: [
     {
       name: "",
       designation: "",
       mobile: "",
       email: "",
+      signature: "",
     },
     {
       name: "",
       designation: "",
       mobile: "",
       email: "",
+      signature: "",
     },
   ],
 
-  
+
   ugBranches: [],
   pgSpecializations: [],
 
-  
+
   jobProfiles: {
     btech: {
       designation: "",

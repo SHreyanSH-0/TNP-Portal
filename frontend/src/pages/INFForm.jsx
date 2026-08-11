@@ -18,7 +18,7 @@ import INFBetterUnderstandingSection from "../components/inf/INFBetterUnderstand
 import INFImportantNotes from "../components/inf/INFImportantNotes";
 import INFSubmitSection from "../components/inf/INFSubmitSection";
 import FormValidationMessage from "../components/FormValidationMessage";
-import UndertakingSection from "../components/UndertakingSection";
+import INFUndertakingSection from "../components/inf/INFUndertakingSection";
 export default function INFForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -66,6 +66,19 @@ export default function INFForm() {
     }));
   };
 
+  const handleCategoryToggle = (option) => {
+    setValidationMessage("");
+    setFormData((prev) => {
+      const alreadySelected = prev.category.includes(option);
+      return {
+        ...prev,
+        category: alreadySelected
+          ? prev.category.filter((item) => item !== option)
+          : [...prev.category, option],
+      };
+    });
+  };
+
   const nextStep = () => {
     const form = document.querySelector('form');
     if (form && !form.checkValidity()) {
@@ -97,65 +110,70 @@ export default function INFForm() {
 
     // STEP 1
     if (currentStep === 1) {
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      if (
-        !formData.companyName.trim() ||
-        !formData.emailAddress.trim()
-      ) {
-        setValidationMessage(
-          "Company Name and Email Address are required to continue."
-        );
+      if (!formData.companyName.trim()) {
+        setValidationMessage("Company Name is required to continue.");
         scrollToTop();
         return;
       }
-      if (!emailRegex.test(formData.emailAddress)) {
-        setValidationMessage("Please enter a valid Email Address.");
-        scrollToTop();
-        return;
-      }
+
       const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/.*)?$/;
       if (formData.website && !urlRegex.test(formData.website)) {
         setValidationMessage("Please enter a valid Website URL.");
         scrollToTop();
         return;
       }
-    }
 
-    // STEP 2
-    if (currentStep === 2) {
-      if (!formData.internshipType) {
-        setValidationMessage("Please select the Internship Type before proceeding.");
+      if (!formData.category || formData.category.length === 0) {
+        setValidationMessage("Please select at least one Category/Sector.");
         scrollToTop();
         return;
       }
 
+      if (
+        formData.category.includes("Other") &&
+        !formData.categoryOther.trim()
+      ) {
+        setValidationMessage("Please specify the Category/Sector.");
+        scrollToTop();
+        return;
+      }
+
+      if (!formData.hiringType) {
+        setValidationMessage("Please select a Hiring Type.");
+        scrollToTop();
+        return;
+      }
+    }
+
+    // STEP 2
+    // STEP 2
+    if (currentStep === 2) {
       const hasInternshipProfile = Object.values(
         formData.internshipProfiles
       ).some((profile) => {
         return (
           profile.designation?.trim() &&
-          profile.gross?.trim() &&
+          profile.stipend?.trim() &&
           profile.location?.trim()
         );
       });
 
       if (!hasInternshipProfile) {
         setValidationMessage(
-          "Please complete the Internship Profile (Designation, Gross Stipend and Location) for at least one programme before proceeding."
+          "Please complete the Job Profile (Job Designation, Stipend and Location) for at least one programme before proceeding."
         );
         scrollToTop();
         return;
       }
 
       const hasInvalidNumeric = Object.values(formData.internshipProfiles).some((profile) => {
-        const grossInvalid = profile.gross && !/^\d+(\.\d{1,2})?$/.test(profile.gross);
+        const ctcInvalid = profile.ctc && !/^\d+(\.\d{1,2})?$/.test(profile.ctc);
         const stipendInvalid = profile.stipend && !/^\d+(\.\d{1,2})?$/.test(profile.stipend);
-        const trainingPeriodInvalid = profile.trainingPeriod && !/^\d+(\.\d{1,2})?$/.test(profile.trainingPeriod);
-        return grossInvalid || stipendInvalid || trainingPeriodInvalid;
+        return ctcInvalid || stipendInvalid;
       });
 
       if (hasInvalidNumeric) {
-        setValidationMessage("Please ensure Gross Stipend, In-Hand Stipend, and Training Period are valid numbers with up to 2 decimal places.");
+        setValidationMessage("Please ensure CTC and Stipend are valid numbers with up to 2 decimal places.");
         scrollToTop();
         return;
       }
@@ -241,22 +259,8 @@ export default function INFForm() {
       return;
     }
 
-    if (!formData.formFillerName || formData.formFillerName.trim() === "") {
-      setValidationMessage("Please enter the name of the form filler.");
-      scrollToTop();
-      return;
-    }
-
-    if (!formData.formFillerDesignation || formData.formFillerDesignation.trim() === "") {
-      setValidationMessage("Please enter the designation.");
-      scrollToTop();
-      return;
-    }
-
     const trimmedData = {
       ...formData,
-      formFillerName: formData.formFillerName.trim(),
-      formFillerDesignation: formData.formFillerDesignation.trim()
     };
 
     setIsSubmitting(true);
@@ -286,7 +290,7 @@ export default function INFForm() {
     <FormLayout>
       <div ref={formTopRef}>
         <FormStepper
-          title="Internship Notification Form"
+          title="Summer Internship Notification Form"
           currentStep={currentStep}
           steps={stepperLabels}
         />
@@ -302,6 +306,7 @@ export default function INFForm() {
               <INFCompanyDetailsSection
                 formData={formData}
                 handleChange={handleChange}
+                handleCategoryToggle={handleCategoryToggle}
               />
 
               <FormNavigation
@@ -402,15 +407,9 @@ export default function INFForm() {
                 handleChange={handleChange}
               />
 
-              <UndertakingSection
+              <INFUndertakingSection
                 formData={formData}
                 handleChange={handleChange}
-                academicNotes={[
-                  "B.Tech students are available for 2-month summer internship (4th & 6th semester).",
-                  "M.Tech students are available for 6/11-month internship.",
-                  "MCA students are available for 2-month internship (4th semester).",
-                  "MBA students are available for 2-month internship.",
-                ]}
               />
 
               <INFSubmitSection
