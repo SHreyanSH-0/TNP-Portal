@@ -35,17 +35,22 @@ export default function INFCoursesSection({
     <SectionCard title="Courses Considered">
       <div className="space-y-10">
 
-        <CheckboxGroup
-          label="Undergraduate Programmes"
-          options={INF_UG_BRANCHES}
-          selected={formData.ugBranches}
-          onChange={(option) =>
-            toggleSelection(
-              "ugBranches",
-              option
-            )
-          }
-        />
+        <div>
+          <h3 className="text-lg font-semibold mb-6">
+            Undergraduate Programme (B.Tech)
+          </h3>
+          <CheckboxGroup
+            label=""
+            options={INF_UG_BRANCHES}
+            selected={formData.ugBranches}
+            onChange={(option) =>
+              toggleSelection(
+                "ugBranches",
+                option
+              )
+            }
+          />
+        </div>
         <div className="mt-8">
           <h4 className="font-semibold text-[#7A0019] mb-2">
             Dual Degree

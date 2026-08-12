@@ -28,17 +28,22 @@ export default function JNFCoursesSection({
     <SectionCard title="Courses Considered for Recruitment">
       <div className="space-y-10">
 
-        <CheckboxGroup
-          label="Undergraduate Programme (B.Tech)"
-          options={JNF_UG_BRANCHES}
-          selected={formData.ugBranches}
-          onChange={(option) =>
-            toggleSelection(
-              "ugBranches",
-              option
-            )
-          }
-        />
+        <div>
+          <h3 className="text-lg font-semibold mb-6">
+            Undergraduate Programme (B.Tech)
+          </h3>
+          <CheckboxGroup
+            label=""
+            options={JNF_UG_BRANCHES}
+            selected={formData.ugBranches}
+            onChange={(option) =>
+              toggleSelection(
+                "ugBranches",
+                option
+              )
+            }
+          />
+        </div>
 
         <div>
           <h3 className="text-lg font-semibold mb-6">

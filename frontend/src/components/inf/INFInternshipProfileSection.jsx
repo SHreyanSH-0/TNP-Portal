@@ -41,10 +41,6 @@ export default function INFInternshipProfileSection({
 
   return (
     <SectionCard title="Job Profile">
-      <p className="text-xs text-gray-500 leading-relaxed italic mb-4">
-        *Any amount to be disbursed after the end of the first 12 months should not be a part of CTC.
-      </p>
-
       <div className="space-y-6">
         {infCourses.map((course) => {
           // Fallback: agar formData.internshipProfiles me is course ka key
@@ -95,6 +91,10 @@ export default function INFInternshipProfileSection({
           );
         })}
       </div>
+      <ul className="mt-6 space-y-1.5 text-sm font-bold text-gray-700 leading-relaxed list-disc list-inside">
+        <li>Performance-based bonuses should not be declared in take-home salary/CTC but as Perks.</li>
+        <li>Any amount to be disbursed after the end of the first 12 months should not be a part of CTC.</li>
+      </ul>
     </SectionCard>
   );
 }

@@ -1,7 +1,7 @@
 import SectionCard from "../SectionCard";
 import InputField from "../InputField";
 import TextAreaField from "../TextAreaField";
-import RadioGroup from "../RadioGroup";
+import RadioCheckboxGroup from "../RadioCheckboxGroup";
 import CheckboxGroup from "../CheckboxGroup";
 
 export default function INFCompanyDetailsSection({
@@ -62,7 +62,7 @@ export default function INFCompanyDetailsSection({
       )}
 
       <div className="mt-8">
-        <RadioGroup
+        <RadioCheckboxGroup
           label="Hiring Type"
           name="hiringType"
           value={formData.hiringType}
