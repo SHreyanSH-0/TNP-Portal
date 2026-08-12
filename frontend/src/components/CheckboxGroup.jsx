@@ -3,11 +3,15 @@ export default function CheckboxGroup({
   options,
   selected,
   onChange,
+  required = false,
 }) {
   return (
     <div>
       <label className="block font-medium text-gray-700 mb-3">
         {label}
+        {required && (
+          <span className="text-red-500 ml-1">*</span>
+        )}
       </label>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">

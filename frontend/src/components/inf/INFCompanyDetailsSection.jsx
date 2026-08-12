@@ -47,6 +47,7 @@ export default function INFCompanyDetailsSection({
           ]}
           selected={formData.category}
           onChange={handleCategoryToggle}
+          required={true}
         />
       </div>
 
@@ -57,6 +58,7 @@ export default function INFCompanyDetailsSection({
             name="categoryOther"
             value={formData.categoryOther}
             onChange={handleChange}
+            required={formData.category?.includes("Other")}
           />
         </div>
       )}
@@ -67,6 +69,7 @@ export default function INFCompanyDetailsSection({
           name="hiringType"
           value={formData.hiringType}
           onChange={handleChange}
+          required={true}
           options={[
             "2 month Internship",
             "Internship + FTE",
